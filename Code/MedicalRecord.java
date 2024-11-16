@@ -93,9 +93,9 @@ public class MedicalRecord {
     public void addAppointmentOutcome(AppointmentOutcome outcome) {
         if (!pastAppointments.contains(outcome)) {  // Check to prevent duplicates
             pastAppointments.add(outcome);
-            System.out.println("Appointment outcome added to medical record for Patient Identifier: " + patient.getPatientIdentifier());
+            System.out.println("Notice: Outcome added for Patient: " + patient.getName());
         } else {
-            System.out.println("Appointment outcome already exists in the record for Patient Identifier: " + patient.getPatientIdentifier());
+            System.out.println("Error: Outcome already exists for Patient: " + patient.getName());
         }
     }
 
@@ -106,7 +106,7 @@ public class MedicalRecord {
     public void addDiagnosis(Diagnosis diagnosis) {
         diagnoses.add(diagnosis);
         entryTimestamps.add(LocalDateTime.now());
-        System.out.println("Diagnosis added to medical record for Patient Identifier: " + patient.getPatientIdentifier());
+        System.out.println("Notice: Diagnosis added for Patient: " + patient.getName());
     }
 
     /**
@@ -116,7 +116,7 @@ public class MedicalRecord {
     public void addPrescription(Prescription prescription) {
         prescriptions.add(prescription);
         entryTimestamps.add(LocalDateTime.now());
-        System.out.println("Prescription added to medical record for Patient Identifier: " + patient.getPatientIdentifier());
+        System.out.println("Notice: Prescription added for Patient: " + patient.getName());
     }
 
     /**
@@ -126,7 +126,7 @@ public class MedicalRecord {
     public void addTreatment(Treatment treatment) {
         treatments.add(treatment);
         entryTimestamps.add(LocalDateTime.now());
-        System.out.println("Treatment added to medical record for Patient Identifier: " + patient.getPatientIdentifier());
+        System.out.println("Notice: Treatment added for Patient Identifier: " + patient.getName());
     }
 
     /**

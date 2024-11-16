@@ -1,20 +1,20 @@
 import java.util.List;
 
 public class Administrator extends Staff implements IUser {
-    private IStaffHandler staffHandler;
-    private IMedicineHandler medicineHandler;
-    private AdministratorHandler adminService;
+    private IStaffHandler staffHandler;         /**< staff Manager for staff-related logic */
+    private IMedicineHandler medicineHandler;   /**< medicine Manager for medicine-related logic */
+    private AdministratorHandler adminService;  /**< Admin Manager for admin-related logic */
 
     /**
      * Constructor for administrator class
-     * @param userId from superlcass
-     * @param password from superlcass
-     * @param name from superlcass
-     * @param gender from superlcass
-     * @param role from superlcass
-     * @param age from superlcass
-     * @param staffHandler manager responsible for staff-related logic
-     * @param medicineHandler manger responsible for medicine-related logic
+     * @param userId            from superlcass
+     * @param password          from superlcass
+     * @param name              from superlcass
+     * @param gender            from superlcass
+     * @param role              from superlcass
+     * @param age               from superlcass
+     * @param staffHandler      staff-related logic
+     * @param medicineHandler   medicine-related logic
      */
      
     public Administrator(String userId, String password, String name, String gender, String role, int age, 
@@ -26,7 +26,7 @@ public class Administrator extends Staff implements IUser {
     }
 
     /**
-     * setting StaffHandler (to prevent cyclic in Main)
+     * setting StaffHandler 
      * @param sm set staffHandler
      */
     public void setStaffHandler(StaffHandler sm){
@@ -34,7 +34,7 @@ public class Administrator extends Staff implements IUser {
     }
 
     /**
-     * setting MedicineHandler (to prevent cyclic in Main)
+     * setting MedicineHandler
      * @param mm set medicineHandler
      */
     public void setMedicineHandler(MedicineHandler mm){
@@ -47,14 +47,16 @@ public class Administrator extends Staff implements IUser {
     @Override
     public void displayMenu() {
         if (isLoggedIn()) {
+                System.out.println("\n===========================\n");
                 System.out.println("\n--- Administrator Menu ---");
-                System.out.println("1. Manage Hospital Staff");
-                System.out.println("2. Manage Medication Inventory");
-                System.out.println("3. Approve Replenishment Requests");
-                System.out.println("4. View Appointments Detail");
-                System.out.println("5. Logout");
+                System.out.println("1. Manage Staff");
+                System.out.println("2. Manage Medicine Stock");
+                System.out.println("3. Approve Replenishments");
+                System.out.println("4. View Appointments Details");
+                System.out.println("5. Log out");
+                System.out.println("\n===========================\n");
         } else {
-            System.out.println("ERROR: Please log in first. (Admin)");
+            System.out.println("Error: Not logged in. (Admin)");
         }
     }
 
@@ -84,7 +86,8 @@ public class Administrator extends Staff implements IUser {
      */
     public void viewAppointmentDetails() {
         List<Appointment> appointments = Appointment.getAllAppointments();
-        System.out.println("All Appointments in the System:\n");
+        System.out.println("\n===========================\n");
+        System.out.println("Appointments in the System\n");
         
         for (Appointment appointment : appointments) {
             System.out.println(appointment);
@@ -100,5 +103,6 @@ public class Administrator extends Staff implements IUser {
                 System.out.println("");
             }
         }
+        System.out.println("\n===========================\n");
     }
 }

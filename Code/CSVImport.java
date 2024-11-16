@@ -55,7 +55,7 @@ public class CSVImport {
                 }
             }
         } catch (FileNotFoundException e) {
-            System.out.println("Error: File not found at '" + filePath + "'. Please check the file location in Main.java and try again.");
+            System.out.println("Error: File not found: " + filePath + ".");
         }
     }
 
@@ -91,7 +91,7 @@ public class CSVImport {
                 }
             }
         } catch (FileNotFoundException e) {
-            System.out.println("Error: File not found at '" + filePath + "'. Please check the file location in Main.java and try again.");
+            System.out.println("Error: File not found:" + filePath + ".");
         }
     }
 
@@ -119,9 +119,9 @@ public class CSVImport {
                 }
             }
         } catch (FileNotFoundException e) {
-            System.out.println("Error: File not found at '" + filePath + "'. Please check the file location in Main.java and try again.");
+            System.out.println("Error: File not found:" + filePath + "'.");
         } catch (NumberFormatException e) {
-            System.out.println("Invalid data format in the file: " + filePath);
+            System.out.println("Error: Invalid data format: " + filePath);
         }
     }
 

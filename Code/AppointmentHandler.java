@@ -6,9 +6,9 @@ import java.util.List;
  */
 public class AppointmentHandler implements IAppointmentHandler {
 
-    private IDoctorHandler doctorHandler;
-    private IPatientHandler patientHandler;
-    private List<Appointment> allAppointments;
+    private IDoctorHandler doctorHandler;       /**< for doctor-related logic */
+    private IPatientHandler patientHandler;     /**< for patient-related logic */
+    private List<Appointment> allAppointments;  /**< list of appointments hospital wide */
 
     /**
      * Constructor for appointment manager
@@ -51,7 +51,9 @@ public class AppointmentHandler implements IAppointmentHandler {
      * @param doctor specified doctor for this method to output his/her available slots
      */
     public void viewAvailableSlots(Doctor doctor) {
-        System.out.println("Available Slots for Dr. " + doctor.getName() + ":");
+        System.out.println("\n===========================\n");
+        System.out.println("Greetings Dr. " + doctor.getName());
+        System.out.println("Available Slots:");
         List<TimeSlot> availableSlots = doctorHandler.getAvailability(doctor);
         for (TimeSlot slot : availableSlots) {
             System.out.println(slot);
@@ -75,7 +77,7 @@ public class AppointmentHandler implements IAppointmentHandler {
             allAppointments.add(appointment);
             
         } else {
-            System.out.println("Doctor is unavailable at the selected time slot.");
+            System.out.println("Notice: Doctor is unavailable.");
         }
     }
 
@@ -93,7 +95,7 @@ public class AppointmentHandler implements IAppointmentHandler {
             doctor.addAvailability(oldTimeSlot); // add the old time to avail
             doctor.removeAvailability(newTimeSlot); // remove the new time from avail
         } else {
-            System.out.println("The selected slot is not available.");
+            System.out.println("Notice: Unavailable slot selected.");
         }
     }
 
@@ -117,11 +119,12 @@ public class AppointmentHandler implements IAppointmentHandler {
      * @param patient the patient whose upcoming appointments are to be retrieved 
      */
     public void viewUpcomingAppointments(Patient patient) {
-        System.out.println("\nViewing Upcoming Appointments for Patient Identifier: " + patient.getUserId());
+        System.out.println("\n===========================\n");
+        System.out.println("\nUpcoming Appointments for Patient: " + patient.getName());
         List<Appointment> upcomingAppointments = getUpcomingAppointments(patient);
     
         if (upcomingAppointments.isEmpty()) {
-            System.out.println("No upcoming appointments found for Patient Identifier: " + patient.getUserId());
+            System.out.println("Notice: No upcoming appointments found");
         } else {
             for (Appointment appointment : upcomingAppointments) {
                 System.out.println("Appointment Identifier: " + appointment.getPatientIdentifier() + 
@@ -153,11 +156,12 @@ public class AppointmentHandler implements IAppointmentHandler {
      * @param doctor the doctor whose upcoming appointments are to be retrieved 
      */
     public void viewUpcomingAppointments(Doctor doctor) {
-        System.out.println("\nViewing Upcoming Appointments for Doctor Identifier: " + doctor.getUserId());
+        System.out.println("\n===========================\n");
+        System.out.println("\nUpcoming Appointments for Dr." + doctor.getName());
         List<Appointment> upcomingAppointments = getUpcomingAppointments(doctor);
     
         if (upcomingAppointments.isEmpty()) {
-            System.out.println("No upcoming appointments found for Doctor Identifier: " + doctor.getUserId());
+            System.out.println("Notice: No upcoming appointments found.");
         } else {
             for (Appointment appointment : upcomingAppointments) {
                 System.out.println("Appointment Identifier: " + appointment.getPatientIdentifier() + 
@@ -182,7 +186,7 @@ public class AppointmentHandler implements IAppointmentHandler {
         }
 
         if (pastAppointments.isEmpty()) {
-            System.out.println("No available past appointments for the patient.");
+            System.out.println("Notice: No past appointments found.");
         }
         return pastAppointments;
     }
@@ -202,7 +206,7 @@ public class AppointmentHandler implements IAppointmentHandler {
         }
 
         if (pastAppointments.isEmpty()) {
-            System.out.println("No available past appointments for the patient.");
+            System.out.println("Notice: No past appointments found.");
         }
         return pastAppointments;
     }
@@ -272,7 +276,7 @@ public class AppointmentHandler implements IAppointmentHandler {
         List<Appointment> appointments = patient.getAppointments();
 
         if (appointments.isEmpty()) {
-            System.out.println("No available appointments for the patient.");
+            System.out.println("Notice: No available appointments found.");
         } else {
             for (Appointment appointment : appointments) {
                 System.out.println(appointment);
@@ -287,7 +291,8 @@ public class AppointmentHandler implements IAppointmentHandler {
     //Utilizing method overloading to do the same, but for doctor
     public void viewAppointments(Doctor doctor) {
         List<Appointment> appointments = doctor.getAppointments();
-        System.out.println("Scheduled Appointments for Doctor Identifier: " + doctor.getUserId());
+        System.out.println("\n===========================\n");
+        System.out.println("Scheduled Appointments for Dr. " + doctor.getName());
         if (appointments.isEmpty()) {
             System.out.println("No available appointments for the patient.");
         } else {
@@ -311,17 +316,17 @@ public class AppointmentHandler implements IAppointmentHandler {
             if (!allAppointments.contains(appointment)) {
                 allAppointments.add(appointment); 
             }
-            System.out.println("Appointment " + appointment.getAppointmentIdentifier() + " accepted.");
+            System.out.println("Notice: Appointment " + appointment.getAppointmentIdentifier() + " accepted.");
             
             Patient patient = patientHandler.findPatientById(appointment.getPatientIdentifier());
             if (patient != null) {
                 if (!patient.getAppointments().contains(appointment)) {
                     patient.addAppointment(appointment);
-                    System.out.println("Appointment added to Patient " + patient.getName() + "'s record.");
+                    System.out.println("Notice: Appointment added to Patient " + patient.getName() + "'s record.");
                 }
                 
             } else {
-                System.out.println("Patient with Identifier " + appointment.getPatientIdentifier() + " not found.");
+                System.out.println("Error: Patient not found.");
             }
             doctor.addAssignedPatientIdentifier(patient.getUserId());
         } else {
@@ -361,7 +366,7 @@ public class AppointmentHandler implements IAppointmentHandler {
                     patient.removeAppointment(appointment);
                     doctor.removeAppointment(appointment);
                     doctor.addAvailability(appointment.getTimeSlot());
-                    System.out.println("Appointment with Identifier " + appointment.getAppointmentIdentifier() + " has been canceled.");
+                    System.out.println("Appointment " + appointment.getAppointmentIdentifier() + "canceled.");
                 }
             }
         } else if (caller instanceof Patient) {
@@ -374,7 +379,7 @@ public class AppointmentHandler implements IAppointmentHandler {
                     patient.removeAppointment(appointment);
                     doctor.removeAppointment(appointment);
                     doctor.addAvailability(appointment.getTimeSlot());
-                    System.out.println("Appointment with Identifier " + appointment.getAppointmentIdentifier() + " has been canceled.");
+                    System.out.println("Appointment " + appointment.getAppointmentIdentifier() + "canceled.");
                 }
             }
         }
@@ -389,19 +394,19 @@ public class AppointmentHandler implements IAppointmentHandler {
     public void viewAllAppointmentOutcome(Staff caller) {
         // Ensure only pharmacists can view all outcomes
         if (caller == null || !"Pharmacist".equalsIgnoreCase(caller.getRole())) {
-            System.out.println("Access denied. Only pharmacists are allowed to view all appointment outcomes.");
+            System.out.println("Access Denied: Only pharmacists are allowed to view all appointment outcomes.");
             return;
         }
-    
-        System.out.println("=== Viewing All Appointment Outcomes ===");
+        System.out.println("\n===========================\n");
+        System.out.println("--- All Appointment Outcomes ---");
         for (Appointment appointment : allAppointments) {
             AppointmentOutcome outcome = appointment.getOutcome();
     
             if (outcome != null) {
-                System.out.println("Appointment Identifier: " + appointment.getAppointmentIdentifier() + ", Outcome: ");
+                System.out.println("Appointment: " + appointment.getAppointmentIdentifier() + ", Outcome: ");
                 System.out.println(outcome.getDetails());
             } else {
-                System.out.println("Appointment Identifier: " + appointment.getAppointmentIdentifier() + " has no recorded outcome.");
+                System.out.println("Appointment: " + appointment.getAppointmentIdentifier() + " has no recorded outcome.");
             }
         }
     }
@@ -430,7 +435,7 @@ public class AppointmentHandler implements IAppointmentHandler {
     public void viewAppointmentOutcome(Patient patient) {
         List<AppointmentOutcome> outcomes = getOutcomesByPatientIdentifier(patient.getUserId());
         if (outcomes.isEmpty()) {
-            System.out.println("No available appointments for the patient.");
+            System.out.println("Notice: No available appointments found.");
         }
         else{
             for (AppointmentOutcome outcome : outcomes) {

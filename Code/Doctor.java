@@ -94,7 +94,7 @@ public class Doctor extends Staff implements IUser {
         if (!alreadyExists) {
             availability.add(newSlot);
         } else {
-            System.out.println("Time slot already set.");
+            System.out.println("Error: Time slot already taken.");
         }
     }
     
@@ -106,7 +106,7 @@ public class Doctor extends Staff implements IUser {
         if (availability.remove(slot)) {
             //System.out.println("Time slot removed from availability: " + slot);
         } else {
-            System.out.println("Time slot not found in availability.");
+            System.out.println("Error: Time slot not found.");
         }
     }
     
@@ -134,7 +134,7 @@ public class Doctor extends Staff implements IUser {
         }
     
         if (!hasUpcomingAppointments) {
-            System.out.println("There are no upcoming appointments.");
+            System.out.println("Notice: No upcoming appointments.");
         }
     }
 
@@ -154,18 +154,17 @@ public class Doctor extends Staff implements IUser {
     @Override
     public void displayMenu() {
         if (isLoggedIn()) {
-            
-            System.out.println("\n--- Doctor Menu ---");
-            System.out.println("1. View Patient Medical Records");
-            System.out.println("2. Update Patient Medical Records");
-            System.out.println("3. View Personal Schedule");
-            System.out.println("4. Set Availability for Appointments");
-            System.out.println("5. Accept or Decline Appointment Requests");
+            System.out.println("\n===========================\n");
+            System.out.println("1. View Patient Records");
+            System.out.println("2. Update Patient Records");
+            System.out.println("3. View Schedule");
+            System.out.println("4. Set Availability");
+            System.out.println("5. Accept or Decline Appointment ");
             System.out.println("6. View Upcoming Appointments");
             System.out.println("7. Record Appointment Outcome");
             System.out.println("8. Logout");
         } else {
-            System.out.println("ERROR. PLEASE LOG IN! (Doctor)");
+            System.out.println("Error: Not logged in");
         }
     }
 }

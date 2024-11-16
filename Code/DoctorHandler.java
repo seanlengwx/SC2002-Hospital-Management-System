@@ -60,7 +60,7 @@ public class DoctorHandler implements IDoctorHandler {
      */
     public void viewPatientRecord(Doctor doctor, String patientIdentifier) {
         if (!doctor.getAssignedPatientIdentifiers().contains(patientIdentifier)) {
-            System.out.println("Access denied. Patient is not under your care.");
+            System.out.println("Access denied: Patient is not under your care.");
             return;
         }
         MedicalRecord record = MedicalRecord.getRecordByPatientIdentifier(patientIdentifier);
@@ -68,7 +68,7 @@ public class DoctorHandler implements IDoctorHandler {
             System.out.println("Medical Record for Patient Identifier: " + patientIdentifier);
             record.viewMedicalRecord();
         } else {
-            System.out.println("No medical record found for Patient Identifier: " + patientIdentifier);
+            System.out.println("Error: No medical record found.");
         }
     }
 
@@ -82,7 +82,7 @@ public class DoctorHandler implements IDoctorHandler {
                 return doctor;
             }
         }
-        System.out.println("Doctor with Identifier " + doctorId + " not found.");
+        System.out.println("Error: Doctor:" + doctorId + " not found.");
         return null;
     }
     
@@ -114,9 +114,9 @@ public class DoctorHandler implements IDoctorHandler {
     public void assignPatient(Doctor doctor, String patientIdentifier) {
         if (!doctor.getAssignedPatientIdentifiers().contains(patientIdentifier)) {
             doctor.getAssignedPatientIdentifiers().add(patientIdentifier);
-            System.out.println("Patient Identifier " + patientIdentifier + " assigned to Dr. " + doctor.getName());
+            System.out.println("Notice: Patient Identifier " + patientIdentifier + " assigned to Dr. " + doctor.getName());
         } else {
-            System.out.println("Patient Identifier " + patientIdentifier + " is already assigned to Dr. " + doctor.getName());
+            System.out.println("Error: Patient Identifier " + patientIdentifier + " is already assigned to Dr. " + doctor.getName());
         }
     }
     
@@ -128,9 +128,9 @@ public class DoctorHandler implements IDoctorHandler {
     public void addAppointment(Doctor doctor, Appointment appointment) {
         if (!doctor.getAppointments().contains(appointment)) {
             doctor.getAppointments().add(appointment);
-            System.out.println("Appointment added to Dr. " + doctor.getName() + "'s schedule.");
+            System.out.println("Notice: Appointment added to Dr. " + doctor.getName() + "'s schedule.");
         } else {
-            System.out.println("This appointment already exists in the schedule.");
+            System.out.println("Error: Appointment already scheduled.");
         }
     }
 
@@ -143,7 +143,7 @@ public class DoctorHandler implements IDoctorHandler {
         if (doctor.getAppointments().remove(appointment)) {
             
         } else {
-            System.out.println("Appointment not found in Dr. " + doctor.getName() + "'s schedule.");
+            System.out.println("Error: Appointment not found schedule.");
         }
     }
 
@@ -168,7 +168,7 @@ public class DoctorHandler implements IDoctorHandler {
             Diagnosis diagnosis = new Diagnosis(diagnosisIdentifier, details, LocalDate.now());
             record.addDiagnosis(diagnosis);
         } else {
-            System.out.println("Patient record not found.");
+            System.out.println("Error: Patient record not found.");
         }
     }
     
@@ -183,9 +183,9 @@ public class DoctorHandler implements IDoctorHandler {
         if (record != null) {
             Treatment treatment = new Treatment(treatmentIdentifier, details, LocalDate.now());
             record.addTreatment(treatment);
-            System.out.println("Treatment added successfully.");
+            System.out.println("Notice: Treatment added successfully.");
         } else {
-            System.out.println("Patient record not found.");
+            System.out.println("Error: Patient record not found.");
         }
     }
     
@@ -209,7 +209,7 @@ public class DoctorHandler implements IDoctorHandler {
                 index = scanner.nextInt();
                 scanner.nextLine();  
             } catch (InputMismatchException e) {
-                System.out.println("Invalid input. Please enter a valid number.");
+                System.out.println("Error: Invalid input. Please enter a valid number.");
                 scanner.nextLine();  
                 continue;
             }
@@ -227,11 +227,11 @@ public class DoctorHandler implements IDoctorHandler {
                     quantity = scanner.nextInt();
                     scanner.nextLine();
                     if (quantity <= 0) {
-                        System.out.println("Quantity must be a positive number.");
+                        System.out.println("Error: Quantity must be a positive number.");
                         continue;
                     }
                 } catch (InputMismatchException e) {
-                    System.out.println("Invalid input. Please enter a valid quantity.");
+                    System.out.println("Error: Invalid input. Please enter a valid quantity.");
                     scanner.nextLine();
                     continue;
                 }
@@ -240,12 +240,12 @@ public class DoctorHandler implements IDoctorHandler {
                 quantities.add(quantity);
                 System.out.println("Added: " + selectedMedicine.getName() + " (Quantity: " + quantity + ")");
             } else {
-                System.out.println("Invalid index. Please select a valid medicine from the inventory.");
+                System.out.println("Error: Invalid index. Please select a valid medicine from the inventory.");
             }
         }
     
         if (selectedMedicines.isEmpty()) {
-            System.out.println("No medicines selected. Prescription was not created.");
+            System.out.println("Error: No medicine selected. Prescription not created.");
             return;
         }
     
@@ -253,16 +253,16 @@ public class DoctorHandler implements IDoctorHandler {
         MedicalRecord record = MedicalRecord.getRecordByPatientIdentifier(patientIdentifier);
         if (record != null) {
             record.addPrescription(prescription);
-            System.out.println("Prescription added successfully to patient record.");
+            System.out.println("Notice: Prescription added successfully to patient record.");
     
             if (prescriptionHandler != null) {
                 prescriptionHandler.addPrescription(prescription);
-                System.out.println("Prescription added to PrescriptionHandler for pharmacist access.");
+                System.out.println("Notice: Prescription added to PrescriptionHandler for pharmacist access.");
             } else {
                 System.out.println("Error: PrescriptionHandler is not initialized.");
             }
         } else {
-            System.out.println("Patient record not found.");
+            System.out.println("Error: Patient record not found.");
         }
     }
 }

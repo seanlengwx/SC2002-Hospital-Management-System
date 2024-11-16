@@ -8,12 +8,12 @@ public class Appointment {
 
     private static List<Appointment> allAppointments = new ArrayList<>();
 
-	private String appointmentIdentifier;
-	private String patientIdentifier;
-	private String doctorIdentifier;
-	private TimeSlot timeSlot;
-	private String status;
-    private AppointmentOutcome outcome;
+	private String appointmentIdentifier;   /**< appointmentID */
+	private String patientIdentifier;       /**< patientID */
+	private String doctorIdentifier;        /**< doctorID */
+	private TimeSlot timeSlot;              /**< timeslot for appointments */
+	private String status;                  /**< status of the appointment (confirmed/cancelled/pending) */
+    private AppointmentOutcome outcome;     /**< outcome of the appointment */
 
     /**
      * Constructor for appointment class
@@ -29,7 +29,7 @@ public class Appointment {
         this.doctorIdentifier = doctorIdentifier;
         this.timeSlot = timeSlot;
         this.status = status;
-        this.outcome = null;  //no outcome initially
+        this.outcome = null;
 
         allAppointments.add(this);
     }
@@ -92,10 +92,10 @@ public class Appointment {
 
     /**
      * sets a record outcome for the patient
-     * @param services the services that was done for the patient
-     * @param notes the notes for the outcome
-     * @param prescription the prescriptions
-     * @param patient the patient object this outcome is for
+     * @param services      services done for the patient
+     * @param notes         notes from Doctor
+     * @param prescription  prescriptions
+     * @param patient       patient the outcome is for
      */
     public void recordOutcome(String services, String notes, Prescription prescription, Patient patient) {
         if (this.outcome == null) {
@@ -105,7 +105,7 @@ public class Appointment {
             record.addAppointmentOutcome(outcome);
             }   
         else {
-                System.out.println("Outcome already exists in the patient record for Patient Identifier: " + patientIdentifier);
+                System.out.println("Error: Existing outcome found.");
         }
     }
     
