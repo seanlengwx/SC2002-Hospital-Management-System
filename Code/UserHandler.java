@@ -30,12 +30,13 @@ public class UserHandler {
      * @param prescriptionHandler manager responsible for prescription-related operations
      */
     public UserHandler(List<User> users, IDoctorHandler doctorHandler, IAppointmentHandler appointmentHandler, 
-                       IMedicineHandler medicineHandler, IPrescriptionHandler prescriptionHandler) {
+                       IMedicineHandler medicineHandler, IPrescriptionHandler prescriptionHandler, PasswordValidator passwordValidator) {
         this.users = users;
         this.doctorHandler = doctorHandler;
         this.appointmentHandler = appointmentHandler;
         this.medicineHandler = medicineHandler;
-        this.prescriptionHandler = prescriptionHandler; 
+        this.prescriptionHandler = prescriptionHandler;
+        this.passwordValidator = passwordValidator;
     }
 
     /**
@@ -864,12 +865,23 @@ public class UserHandler {
 
     /**
      * prompts user for password change upon their first logon
+     * check if password is strong using password validator
      * @param user the user that require to change password
      */
     private void promptPasswordChange(User user) {
         Scanner scanner = new Scanner(System.in);
-        System.out.print("Enter new password: ");
-        String newPassword = scanner.nextLine();
+        String newPassword;
+        
+        while (true) {
+            System.out.print("Enter new password: ");
+            newPassword = scanner.nextLine();
+            
+            if (!passwordValidator.isStrongPassword(newPassword)) {
+                System.out.println("Password must be at least 8 characters long, contain at least one uppercase letter, one lowercase letter, one digit, and one special character.");
+            } else {
+                break;
+            }
+        }
     
         System.out.print("Confirm new password: ");
         String confirmPassword = scanner.nextLine();
