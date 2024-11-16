@@ -17,6 +17,7 @@ public class UserHandler {
     private IAppointmentHandler appointmentHandler;
     private IMedicineHandler medicineHandler;
     private IPrescriptionHandler prescriptionHandler;
+    private PasswordValidator passwordValidator;
 
     //delcaring a regex to detect email for contactInfo update
     private static final Pattern EMAIL_PATTERN = Pattern.compile("^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$");
