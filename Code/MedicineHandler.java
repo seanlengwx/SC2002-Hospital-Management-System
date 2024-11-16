@@ -24,7 +24,7 @@ public class MedicineHandler implements IMedicineHandler {
     public void addMedicine(String name, int stock, int alertLevel) {
         Medicine existingMedicine = findMedicineByName(name);
         if (existingMedicine != null) {
-            System.out.println("Medicine with name " + name + " already exists in the inventory.");
+            System.out.println("Error: " + name + " already exists.");
             return;
         }
         Medicine medicine = new Medicine(name, stock, alertLevel);
@@ -50,7 +50,7 @@ public class MedicineHandler implements IMedicineHandler {
         if (medicine != null) {
             return medicine.getStock() <= medicine.getAlertLevel();
         }
-        System.out.println("Medicine '" + name + "' not found in inventory.");
+        System.out.println("Error: " + name + "not found in inventory.");
         return false;
     }
 
@@ -73,9 +73,9 @@ public class MedicineHandler implements IMedicineHandler {
         Medicine medicine = findMedicineByName(name);
         if (medicine != null) {
             medicine.setStock(newStock);
-            System.out.println("Updated stock for " + name + " to " + newStock + ".");
+            System.out.println("Notice: Updated stock: " + name + " to " + newStock + ".");
         } else {
-            System.out.println("Medicine '" + name + "' not found in inventory.");
+            System.out.println("Error: " + name + "not found in inventory.");
         }
     }
 
@@ -88,9 +88,9 @@ public class MedicineHandler implements IMedicineHandler {
         Medicine medicine = findMedicineByName(name);
         if (medicine != null) {
             medicine.setAlertLevel(newAlertLevel);
-            System.out.println("Updated alert level for " + name + " to " + newAlertLevel + ".");
+            System.out.println("Notice: Updated alert level for " + name + " to " + newAlertLevel + ".");
         } else {
-            System.out.println("Medicine '" + name + "' not found in inventory.");
+            System.out.println("Warning: " + name + "not found in inventory.");
         }
     }
     
@@ -102,9 +102,9 @@ public class MedicineHandler implements IMedicineHandler {
         Medicine medicineToRemove = findMedicineByName(name);
         if (medicineToRemove != null) {
             medicines.remove(medicineToRemove);
-            System.out.println("Medicine " + name + " removed.");
+            System.out.println("Notice: " + name + " removed.");
         } else {
-            System.out.println("Medicine '" + name + "' not found in inventory.");
+            System.out.println("Warning: " + name + "not found in inventory.");
         }
     }
 
@@ -135,8 +135,9 @@ public class MedicineHandler implements IMedicineHandler {
      */
     public void displayMedicineManagementMenu() {
         Scanner scanner = new Scanner(System.in);
+        System.out.println("\n===========================\n");
         System.out.println("\n--- Medicine Management ---");
-        System.out.println("1. View All Medicines");
+        System.out.println("1. View Medicine");
         System.out.println("2. Add New Medicine");
         System.out.println("3. Update Medicine Stock");
         System.out.println("4. Update Stock Alert Level");
@@ -156,7 +157,7 @@ public class MedicineHandler implements IMedicineHandler {
             case 3 -> updateMedicineStockMenu();
             case 4 -> updateStockAlertLevelMenu();
             case 5 -> removeMedicineMenu();
-            default -> System.out.println("Invalid option.");
+            default -> System.out.println("Error: Invalid option.");
         }
         
     }
@@ -174,7 +175,7 @@ public class MedicineHandler implements IMedicineHandler {
         int alertLevel = scanner.nextInt();
 
         addMedicine(name, stock, alertLevel);
-        System.out.println("Medicine added: " + name + " with stock " + stock + " and alert level " + alertLevel);
+        System.out.println("Notice: Medicine added: " + name + ", Stock: " + stock + ", Alert level: " + alertLevel);
         
     }
 
@@ -188,7 +189,7 @@ public class MedicineHandler implements IMedicineHandler {
         try {
             newStock = Integer.parseInt(scanner.nextLine());
         } catch (NumberFormatException e) {
-            System.out.println("Invalid stock amount. Please enter a valid number.");
+            System.out.println("Error: Invalid stock amount. Please enter a valid number.");
             
             return;
         }
@@ -209,7 +210,7 @@ public class MedicineHandler implements IMedicineHandler {
         try {
             newAlertLevel = Integer.parseInt(scanner.nextLine());
         } catch (NumberFormatException e) {
-            System.out.println("Invalid alert level. Please enter a valid number.");
+            System.out.println("Error: Invalid alert level. Please enter a valid number.");
             
             return;
         }
@@ -224,15 +225,15 @@ public class MedicineHandler implements IMedicineHandler {
             Medicine selectedMedicine = selectMedicineByIndex();
             
             if (selectedMedicine == null) {
-                System.out.println("No medicine selected or invalid index.");
+                System.out.println("Error: No medicine selected or invalid index.");
                 return;
             }
             
             removeMedicine(selectedMedicine.getName());
-            System.out.println("Removed medicine: " + selectedMedicine.getName());
+            System.out.println("Notice: Removed medicine: " + selectedMedicine.getName());
             
         } catch (Exception e) {
-            System.out.println("Error removing medicine: " + e.getMessage());
+            System.out.println("Error: Unable to remove medicine: " + e.getMessage());
         }
     }
     
@@ -241,7 +242,8 @@ public class MedicineHandler implements IMedicineHandler {
      * view all pending replenishment request
      */
     public void viewReplenishmentRequests() {
-        System.out.println("Pending Replenishment Requests:");
+        System.out.println("\n===========================\n");
+        System.out.println("Replenishment Requests:");
         for (ReplenishmentRequest request : ReplenishmentRequest.getRequests()) {
             String status = request.isApproved() ? "Approved" : "Pending";
             System.out.println("Request Identifier: " + request.getRequestIdentifier() 
@@ -259,11 +261,11 @@ public class MedicineHandler implements IMedicineHandler {
         for (ReplenishmentRequest request : ReplenishmentRequest.getRequests()) {
             if (request.getRequestIdentifier().equals(requestIdentifier) && !request.isApproved()) {
                 request.approve();
-                System.out.println("Replenishment request " + requestIdentifier + " has been approved.");
+                System.out.println("Notice: Request " + requestIdentifier + " approved.");
                 return;
             }
         }
-        System.out.println("Replenishment request not found or already approved.");
+        System.out.println("Error: Request not found / approved.");
     }
 
     /**
@@ -310,7 +312,7 @@ public class MedicineHandler implements IMedicineHandler {
         if (index >= 0 && index < medicines.size()) {
             return medicines.get(index);
         }
-        System.out.println("Invalid index. Please select a valid medicine.");
+        System.out.println("Error: Invalid index. Please select a valid medicine.");
         return null;
     }
     
@@ -334,22 +336,17 @@ public class MedicineHandler implements IMedicineHandler {
         try {
             index = Integer.parseInt(scanner.nextLine());
         } catch (NumberFormatException e) {
-            System.out.println("Invalid input. Please enter a valid number.");
+            System.out.println("Error: Invalid input. Please enter a valid number.");
             
             return null;
         }
     
         if (index < 0 || index >= inventory.size()) {
-            System.out.println("Invalid index. Please select a valid medicine.");
+            System.out.println("Error: Invalid index. Please select a valid medicine.");
             
             return null;
         }
         
         return inventory.get(index);
     }
-
-
-    
-    
-
 }

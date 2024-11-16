@@ -39,7 +39,7 @@ public class Medicine {
 	//replenish method
 	public void replenish(int amount) {
 		this.stock += amount;
-		System.out.printf("Stock replenished. %d stocks added to %s. New amount: %d \n", amount, name, stock);
+		System.out.printf("Notice: %d stocks added to %s.\nNew amount: %d \n", amount, name, stock);
 	}
 
 	/**
@@ -48,7 +48,7 @@ public class Medicine {
 	 */
 	public void adjustAlert(int newAlertLevel) {
 		this.alertLevel = newAlertLevel;
-		System.out.println("Alert for " + name + " has been modified to " + alertLevel);
+		System.out.println("Notice: Alert for " + name + " has been modified to " + alertLevel);
 		
 	}
 	
@@ -132,7 +132,7 @@ public class Medicine {
         if (quantity <= stock) {
             stock -= quantity;
         } else {
-            throw new IllegalArgumentException("Insufficient stock for " + name);
+            throw new IllegalArgumentException("Warning: Insufficient stock for " + name);
         }
     }
 
