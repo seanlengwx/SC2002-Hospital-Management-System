@@ -17,7 +17,6 @@ public class UserHandler {
     private IAppointmentHandler appointmentHandler;
     private IMedicineHandler medicineHandler;
     private IPrescriptionHandler prescriptionHandler;
-    private PasswordValidator passwordValidator;
 
     //delcaring a regex to detect email for contactInfo update
     private static final Pattern EMAIL_PATTERN = Pattern.compile("^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$");
@@ -31,13 +30,12 @@ public class UserHandler {
      * @param prescriptionHandler manager responsible for prescription-related operations
      */
     public UserHandler(List<User> users, IDoctorHandler doctorHandler, IAppointmentHandler appointmentHandler, 
-                       IMedicineHandler medicineHandler, IPrescriptionHandler prescriptionHandler, PasswordValidator passwordValidator) {
+                       IMedicineHandler medicineHandler, IPrescriptionHandler prescriptionHandler) {
         this.users = users;
         this.doctorHandler = doctorHandler;
         this.appointmentHandler = appointmentHandler;
         this.medicineHandler = medicineHandler;
         this.prescriptionHandler = prescriptionHandler;
-        this.passwordValidator = passwordValidator;
     }
 
     /**
@@ -748,10 +746,8 @@ public class UserHandler {
                         }
                     }
                 break;
-                
-                
 
-    
+                    
                 case 5:
                     // reschedule appointment
                     List<Appointment> appointments = patient.getAppointments().stream()
@@ -877,7 +873,7 @@ public class UserHandler {
             System.out.print("Enter new password: ");
             newPassword = scanner.nextLine();
             
-            if (!passwordValidator.isStrongPassword(newPassword)) {
+            if (!isStrongPassword(newPassword)) {
                 System.out.println("Password must be at least 8 characters long, contain at least one uppercase letter, one lowercase letter, one digit, and one special character.");
             } else {
                 break;
@@ -895,6 +891,20 @@ public class UserHandler {
             System.out.println("Passwords do not match. Try again.");
             promptPasswordChange(user); 
         }
+    }
+
+    /**
+     * Validates the strength of a password
+     * @param password the password to validate
+     * @return true if the password is strong, otherwise false
+     */
+    private boolean isStrongPassword(String password) {
+        if (password.length() < 8) return false;
+        if (!Pattern.compile("[A-Z]").matcher(password).find()) return false; // At least one uppercase letter
+        if (!Pattern.compile("[a-z]").matcher(password).find()) return false; // At least one lowercase letter
+        if (!Pattern.compile("[0-9]").matcher(password).find()) return false; // At least one digit
+        if (!Pattern.compile("[^a-zA-Z0-9]").matcher(password).find()) return false; // At least one special character
+        return true;
     }
     
     /**
