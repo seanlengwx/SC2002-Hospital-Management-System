@@ -32,7 +32,7 @@ public class PrescriptionHandler implements IPrescriptionHandler {
      */
     public void addPrescription(Prescription prescription) {
         prescriptions.add(prescription);
-        System.out.println("Prescription added: " + prescription);
+        System.out.println("Notice: Prescription added: " + prescription);
     }
 
     /**
@@ -79,19 +79,19 @@ public class PrescriptionHandler implements IPrescriptionHandler {
                     //check stock and deduct when dispensed
                     if (medicine.getStock() >= quantity) {
                         medicine.deductStock(quantity);
-                        System.out.println("Deducted " + quantity + " units of " + medicine.getName() + ". Remaining stock: " + medicine.getStock());
+                        System.out.println("Notie: Deducted " + quantity + " units of " + medicine.getName() + ". Remaining stock: " + medicine.getStock());
                         if(medicine.alertReplenishment()){
-                            System.out.println(medicine.getName() + " requires replenishment.");
+                            System.out.println("Warning: " + medicine.getName() + " requires replenishment.");
                         };
                     } else {
-                        System.out.println("Insufficient stock for " + medicine.getName() + ". Prescription update aborted.");
+                        System.out.println("Error: Insufficient stock for " + medicine.getName() + ". Prescription update cancelled.");
                         return false;
                     }
                 }
 
                 return true;
             } else {
-                System.out.println("This prescription has already been dispensed.");
+                System.out.println("Error: Prescription already dispensed.");
                 return false;
             }
         } else {

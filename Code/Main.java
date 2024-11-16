@@ -48,9 +48,9 @@ public class Main {
 
 
         //CSV file paths
-        String staffFilePath = "./Staff_List.csv";  
-        String patientFilePath = "./Patient_List.csv";  
-        String medicineFilePath = "./Medicine_List.csv";  
+        String staffFilePath = "./Staff.txt";  
+        String patientFilePath = "./Patient.txt";  
+        String medicineFilePath = "./Medicine.txt";  
 
         //loading of CSV files
         CSVImport.importStaffData(staffFilePath, staffHandler, medicineHandler, pharmacistHandler, doctorHandler, prescriptionHandler);

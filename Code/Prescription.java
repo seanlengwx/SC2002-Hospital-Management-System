@@ -67,9 +67,9 @@ public class Prescription {
     public void updateStatus() {
         if ("Pending".equals(this.status)) {
             this.status = "Dispensed";
-            System.out.println("Prescription " + prescriptionIdentifier + " status updated to Dispensed.");
+            System.out.println("Notice: Prescription: " + prescriptionIdentifier + " status updated to Dispensed.");
         } else {
-            System.out.println("This prescription has already been dispensed.");
+            System.out.println("Error: Prescription already dispensed.");
         }
     }
     

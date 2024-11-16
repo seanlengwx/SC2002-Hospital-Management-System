@@ -73,7 +73,7 @@ public class TimeSlot {
             LocalTime time = dateTime.toLocalTime();
             return new TimeSlot(date, time);
         } catch (Exception e) {
-            System.out.println("Invalid time slot format. Please use yyyy-MM-dd HH:mm");
+            System.out.println("Error: Invalid time slot format (yyyy-MM-dd HH:mm).");
             return null;
         }
     }

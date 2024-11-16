@@ -43,11 +43,12 @@ class PharmacistHandler implements IPharmacistHandler {
      * display all prescription record
      */
     public void viewPrescriptionRecords() {
+        System.out.println("\n===========================\n");
         System.out.println("\nPrescription Records:");
         List<Prescription> prescriptions = prescriptionHandler.getAllPrescriptions();
 
         if (prescriptions.isEmpty()) {
-            System.out.println("No prescriptions available.");
+            System.out.println("Error: No prescriptions available.");
         } else {
             for (Prescription prescription : prescriptions) {
                 System.out.println(prescription);
@@ -59,11 +60,12 @@ class PharmacistHandler implements IPharmacistHandler {
      * display all pending prescription record
      */
     public void viewPendingPrescriptionRecords() {
+        System.out.println("\n===========================\n");
         System.out.println("\nPending Prescription Records:");
         List<Prescription> pendingPrescriptions = prescriptionHandler.getPendingPrescriptions();
 
         if (pendingPrescriptions.isEmpty()) {
-            System.out.println("No pending prescriptions available.");
+            System.out.println("Error: No pending prescriptions available.");
         } else {
             for (Prescription prescription : pendingPrescriptions) {
                 System.out.println(prescription);
@@ -77,7 +79,7 @@ class PharmacistHandler implements IPharmacistHandler {
      */
     public void updatePrescriptionStatus(String prescriptionIdentifier) {
         if (!prescriptionHandler.updatePrescriptionStatus(prescriptionIdentifier)) {
-            System.out.println("Prescription with Identifier " + prescriptionIdentifier + " not found.");
+            System.out.println("Error: Prescription: " + prescriptionIdentifier + " not found.");
         }
     }
 
@@ -90,7 +92,7 @@ class PharmacistHandler implements IPharmacistHandler {
         Medicine medicine = medicineHandler.findMedicineByName(medicineName);
 
         if (medicine == null) {
-            System.out.println("Medicine " + medicineName + " not found in inventory.");
+            System.out.println("Error: " + medicineName + " not found in inventory.");
             return;
         }
 
@@ -104,7 +106,7 @@ class PharmacistHandler implements IPharmacistHandler {
             }
 
             if (alreadyRequested) {
-                System.out.println("A replenishment request for " + medicine.getName() + " is already pending.");
+                System.out.println("Notice: Request for " + medicine.getName() + " is already pending.");
                 return;
             }
 
@@ -114,9 +116,9 @@ class PharmacistHandler implements IPharmacistHandler {
             ReplenishmentRequest request = new ReplenishmentRequest(requestIdentifier, medicine, amt, "pharmacistIdentifier", "pharmacistName");
 
             replenishmentRequests.add(request);  // Track this request locally for the pharmacist
-            System.out.println("Replenishment Request Submitted: " + amt + " units of " + medicine.getName());
+            System.out.println("Notice: Request Submitted: " + amt + " units of " + medicine.getName());
         } else {
-            System.out.println("Replenishment is not needed for " + medicine.getName() + ".");
+            System.out.println("Notice: Replenishment not needed for " + medicine.getName() + ".");
         }
     }
 
@@ -132,6 +134,7 @@ class PharmacistHandler implements IPharmacistHandler {
      * Display all replenishment request made by pharmacist
      */
     public void viewReplenishmentRequests() {
+        System.out.println("\n===========================\n");
         System.out.println("Replenishment Requests by Pharmacist:");
         for (ReplenishmentRequest request : replenishmentRequests) {
             String status = request.isApproved() ? "Approved" : "Pending";

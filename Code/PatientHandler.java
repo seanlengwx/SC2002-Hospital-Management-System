@@ -37,7 +37,7 @@ public class PatientHandler implements IPatientHandler {
         if (record != null) {
             record.viewMedicalRecord();
         } else {
-            System.out.println("No medical record found for Patient Identifier: " + patient.getUserId());
+            System.out.println("Error: No medical record found Patient: " + patient.getName());
         }
     }
 
@@ -51,9 +51,9 @@ public class PatientHandler implements IPatientHandler {
         if (newContactInfo != null && !newContactInfo.trim().isEmpty()) {
             patient.setContactInfo(newContactInfo);
             patient.setPhoneNumber(phone);
-            System.out.println("Updated contact information.");
+            System.out.println("Notice: Updated contact information.");
         } else {
-            System.out.println("Invalid contact information.");
+            System.out.println("Error: Invalid contact information.");
         }
     }
     

@@ -21,7 +21,7 @@ public class TreatmentHandler implements ITreatmentHandler {
      */
     public void addTreatment(Treatment treatment) {
         treatments.add(treatment);
-        System.out.println("Treatment added: " + treatment);
+        System.out.println("Notice: Treatment added: " + treatment);
     }
 
     /**
@@ -30,7 +30,7 @@ public class TreatmentHandler implements ITreatmentHandler {
      */
     public void removeTreatment(String treatmentIdentifier) {
         treatments.removeIf(treatment -> treatment.getTreatmentIdentifier().equals(treatmentIdentifier));
-        System.out.println("Treatment with Identifier " + treatmentIdentifier + " removed.");
+        System.out.println("Notice: Treatment " + treatmentIdentifier + " removed.");
     }
 
     /**

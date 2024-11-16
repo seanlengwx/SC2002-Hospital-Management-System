@@ -73,7 +73,7 @@ public class UserHandler {
         System.out.print("Enter User Identifier (or 'E' to exit): ");
         String userId = scanner.nextLine();
         if (userId.equalsIgnoreCase("E")) {
-            System.out.println("Exiting login.");
+            System.out.println("~~~~~Exiting login~~~~~");
             return;
         }
     
@@ -107,7 +107,7 @@ public class UserHandler {
                 return; 
             }
         }
-        System.out.println("Invalid credentials. Please try again.");
+        System.out.println("Error: Invalid credentials. Please try again.");
         loginUser(); // repeat logins if failed
     }
 
@@ -149,13 +149,13 @@ public class UserHandler {
                         if (index >= 0 && index < patientIdentifiers.size()) {
                             doctor.viewPatientMedicalRecord(patientIdentifiers.get(index));
                         } else {
-                            System.out.println("Invalid index.");
+                            System.out.println("Error: Invalid index.");
                         }
                         break;
                     case 2:
                         List<String> patientIdentifiersForUpdate = doctor.getAssignedPatientIdentifiers();
                         if (patientIdentifiersForUpdate.isEmpty()) {
-                            System.out.println("No patients assigned.");
+                            System.out.println("Notice: No patients assigned.");
                             break;
                         }
                         System.out.println("\n--- Assigned Patients ---");
@@ -184,14 +184,14 @@ public class UserHandler {
                                     System.out.print("Enter Diagnosis Identifier: ");
                                     String diagnosisIdentifier = scanner.nextLine().trim();
                                     if (diagnosisIdentifier.isEmpty()) {
-                                        System.out.println("Diagnosis Identifier cannot be empty. Returning to the previous menu.");
+                                        System.out.println("Error: Diagnosis Identifier cannot be empty.");
                                         return; 
                                     }
                             
                                     System.out.print("Enter Diagnosis Details: ");
                                     String details = scanner.nextLine().trim();
                                     if (details.isEmpty()) {
-                                        System.out.println("Diagnosis Details cannot be empty. Returning to the previous menu.");
+                                        System.out.println("Error: Diagnosis Details cannot be empty.");
                                         return; 
                                     }
                             
@@ -201,14 +201,14 @@ public class UserHandler {
                                     System.out.print("Enter Treatment Identifier: ");
                                     String treatmentIdentifier = scanner.nextLine().trim();
                                     if (treatmentIdentifier.isEmpty()) {
-                                        System.out.println("Treatment Identifier cannot be empty. Returning to the previous menu.");
+                                        System.out.println("Error: Treatment Identifier cannot be empty");
                                         return; 
                                     }
                             
                                     System.out.print("Enter Treatment Details: ");
                                     String details = scanner.nextLine().trim();
                                     if (details.isEmpty()) {
-                                        System.out.println("Treatment Details cannot be empty. Returning to the previous menu.");
+                                        System.out.println("Error: Treatment Details cannot be empty.");
                                         return; 
                                     }
                             
@@ -218,10 +218,10 @@ public class UserHandler {
                                     String prescriptionIdentifier = "Pres" + System.currentTimeMillis();
                                     doctorHandler.addPrescription(selectedPatientIdentifier, prescriptionIdentifier, medicineHandler);
                                 }
-                                default -> System.out.println("Invalid choice.");
+                                default -> System.out.println("Error: Invalid choice.");
                             }
                         } else {
-                            System.out.println("Invalid index.");
+                            System.out.println("Error: Invalid index.");
                         }
                         break;
                     
@@ -229,7 +229,7 @@ public class UserHandler {
                         List<TimeSlot> availableSlots = doctor.getAvailability();
                         System.out.println("\n--- Available Timeslots ---");
                         if (availableSlots.isEmpty()) {
-                            System.out.println("No available timeslots.");
+                            System.out.println("Notice: No available timeslots.");
                         } else {
                             for (TimeSlot slot : availableSlots) {
                                 System.out.println(slot);
@@ -242,7 +242,7 @@ public class UserHandler {
                     
                         System.out.println("\n--- Upcoming Appointments ---");
                         if (upcomingAppointments.isEmpty()) {
-                            System.out.println("No upcoming appointments.");
+                            System.out.println("Notice: No upcoming appointments.");
                         } else {
                             for (Appointment appointment : upcomingAppointments) {
                                 System.out.println("Appointment Identifier: " + appointment.getAppointmentIdentifier() +
@@ -264,12 +264,12 @@ public class UserHandler {
                             // we check if the date is before today, no point to have a
                             // available slot in the past
                             if (date.isBefore(today)) {
-                                System.out.println("Invalid date. Please enter a date that is today or later.");
+                                System.out.println("Error: Invalid date. Please enter a date that is today or later.");
                                 break;
                             }
                     
                         } catch (Exception e) {
-                            System.out.println("Invalid date format. Please use YYYY-MM-DD.");
+                            System.out.println("Error: Invalid date format. Please use YYYY-MM-DD.");
                             break;
                         }
                     
@@ -280,13 +280,13 @@ public class UserHandler {
                         try {
                             time = LocalTime.parse(timeInput);
                         } catch (Exception e) {
-                            System.out.println("Invalid time format. Please use HH:MM.");
+                            System.out.println("Error: Invalid time format. Please use HH:MM.");
                             break;
                         }
                     
                         TimeSlot newSlot = new TimeSlot(date, time);
                         doctor.addAvailability(newSlot);
-                        System.out.println("New availability added for Dr." + doctor.getName() + ": " + newSlot);
+                        System.out.println("Notice: Availability added for Dr." + doctor.getName() + ": " + newSlot);
                         break;
 
                     case 5:
@@ -295,7 +295,7 @@ public class UserHandler {
                         .toList();
             
                         if (appointmentReq.isEmpty()) {
-                            System.out.println("No appointments to manage.");
+                            System.out.println("Notie: No appointments to manage.");
                             break;
                         }
                 
@@ -317,10 +317,10 @@ public class UserHandler {
                             } else if ("D".equalsIgnoreCase(AD)) {
                                 appointmentHandler.declineAppointment(doctor, appointment);
                             } else {
-                                System.out.println("Invalid choice.");
+                                System.out.println("Error: Invalid choice.");
                             }
                         } else {
-                            System.out.println("Invalid index.");
+                            System.out.println("Error: Invalid index.");
                         }
                         break;
                     case 6:
@@ -332,7 +332,7 @@ public class UserHandler {
                             .toList();
                     
                         if (confirmedAppointments.isEmpty()) {
-                            System.out.println("No confirmed appointments available for recording an outcome.");
+                            System.out.println("Notice: No confirmed appointments available for recording an outcome.");
                             break;
                         }
                     
@@ -371,7 +371,7 @@ public class UserHandler {
                                         medicineIndex = scanner.nextInt();
                                         scanner.nextLine(); 
                                     } catch (InputMismatchException e) {
-                                        System.out.println("Invalid input. Please enter a valid number.");
+                                        System.out.println("Error: Invalid input. Please enter a valid number.");
                                         scanner.nextLine();
                                         continue;
                                     }
@@ -393,10 +393,10 @@ public class UserHandler {
                                                 if (quantity > 0) { 
                                                     break; 
                                                 } else {
-                                                    System.out.println("Quantity must be greater than 0. Please try again.");
+                                                    System.out.println("Error: Quantity must be greater than 0. Please try again.");
                                                 }
                                             } catch (InputMismatchException e) {
-                                                System.out.println("Invalid quantity. Please enter a valid number.");
+                                                System.out.println("Error: Invalid quantity. Please enter a valid number.");
                                                 scanner.nextLine();
                                             }
                                         }
@@ -409,12 +409,12 @@ public class UserHandler {
                                             System.out.println("Insufficient stock for " + selectedMedicine.getName() + ". Available: " + selectedMedicine.getStock());
                                         }
                                     } else {
-                                        System.out.println("Invalid index. Please select a valid medicine from the inventory.");
+                                        System.out.println("Error: Invalid index. Please select a valid medicine from the inventory.");
                                     }
                                 }
                     
                                 if (medicines.isEmpty()) {
-                                    System.out.println("No valid medicines selected. Prescription was not created.");
+                                    System.out.println("Notice: No valid medicines selected. Prescription was not created.");
                                 } else {
                                     Prescription prescription = new Prescription(prescriptionIdentifier, medicines, qty, "Pending");
                     
@@ -425,7 +425,7 @@ public class UserHandler {
                     
                                     prescriptionHandler.addPrescription(prescription);
                                     selectedAppointment.setStatus("Completed");
-                                    System.out.println("Appointment outcome recorded successfully.");
+                                    System.out.println("Notie: Outcome recorded successfully.");
                                 }
                             } else if (prescriptionYN.equalsIgnoreCase("N")) {
                                 appointmentHandler.recordAppointmentOutcome(
@@ -433,13 +433,13 @@ public class UserHandler {
                                     services, notes, null
                                 );
                                 selectedAppointment.setStatus("Completed");
-                                System.out.println("Appointment outcome recorded successfully without a prescription.");
+                                System.out.println("Notice: Outcome recorded successfully (no prescription).");
                             } else {
-                                System.out.println("Invalid input. Returning to the previous menu.");
+                                System.out.println("Error: Invalid input.");
                                 break; 
                             }
                         } else {
-                            System.out.println("Invalid appointment index. Returning to the previous menu.");
+                            System.out.println("Error: Invalid appointment index.");
                         }
                     break;
                     case 8:
@@ -447,11 +447,11 @@ public class UserHandler {
                         loginUser();
                         return;
                     default:
-                        System.out.println("Invalid choice. Please try again.");
+                        System.out.println("Error: Invalid choice. Please try again.");
                         break;
                 }
             } catch (InputMismatchException e) {
-                System.out.println("Invalid input. Please enter a number.");
+                System.out.println("Error: Invalid input. Please enter a number.");
                 scanner.nextLine(); // Clear the invalid input
             }
         }
@@ -488,11 +488,11 @@ public class UserHandler {
                         loginUser(); 
                         return;
                     default:
-                        System.out.println("Invalid choice. Please try again.");
+                        System.out.println("Error: Invalid choice. Please try again.");
                         continue;
                 }
             } catch (InputMismatchException e) {
-                System.out.println("Invalid input. Please enter a number.");
+                System.out.println("Error: Invalid input. Please enter a number.");
                 scanner.nextLine(); // Clear the invalid input
             }
         }
@@ -523,7 +523,7 @@ public class UserHandler {
                         .filter(prescription -> "Pending".equalsIgnoreCase(prescription.getStatus()))
                         .toList();;
                         if (prescriptions.isEmpty()) {
-                            System.out.println("No prescriptions available.");
+                            System.out.println("Notice: No prescriptions available.");
                         } else {
                             System.out.println("\n--- Prescription Records ---");
                             for (int i = 0; i < prescriptions.size(); i++) {
@@ -536,7 +536,7 @@ public class UserHandler {
                                 Prescription selectedPrescription = prescriptions.get(prescriptionIndex);
                                 pharmacist.updatePrescriptionStatus(selectedPrescription.getPrescriptionIdentifier());
                             } else {
-                                System.out.println("Invalid index. Please select a valid prescription index.");
+                                System.out.println("Error: Invalid index. Please select a valid prescription index.");
                             }
                         }
                         break;
@@ -546,7 +546,7 @@ public class UserHandler {
                     case 5:
                         List<Medicine> inventory = medicineHandler.getInventory();
                         if (inventory.isEmpty()) {
-                            System.out.println("No medicines available for replenishment.");
+                            System.out.println("Notie: No medicines available for replenishment.");
                             break;
                         }
                     
@@ -566,7 +566,7 @@ public class UserHandler {
                     
                             pharmacist.replenishmentRequest(selectedMedicine.getName(), replenishAmount);
                         } else {
-                            System.out.println("Invalid index. Please try again.");
+                            System.out.println("Error: Invalid index. Please try again.");
                         }
                         break;
                     case 6:
@@ -577,11 +577,11 @@ public class UserHandler {
                         loginUser();
                         break;
                     default:
-                        System.out.println("Invalid choice. Please try again.");
+                        System.out.println("Error: Invalid choice. Please try again.");
                         continue;
                 }
             } catch (InputMismatchException e) {
-                System.out.println("Invalid input. Please enter a number.");
+                System.out.println("Error: Invalid input. Please enter a number.");
                 scanner.nextLine(); // Clear the invalid input
             }
         }
@@ -602,7 +602,7 @@ public class UserHandler {
                 choice = scanner.nextInt();
                 scanner.nextLine();  
             } catch (InputMismatchException e) {
-                System.out.println("Invalid input. Please enter a number.");
+                System.out.println("Error: Invalid input. Please enter a number.");
                 scanner.nextLine();
                 continue;
             }
@@ -618,7 +618,7 @@ public class UserHandler {
                     if (newContact.isEmpty()) {
                         newContact = patient.getContactInfo();
                     } else if (!isValidEmail(newContact)) {
-                        System.out.println("Invalid email format. Please enter a valid email address.");
+                        System.out.println("Error: Invalid email format. Please enter a valid email address.");
                         break;
                     }
                 
@@ -633,7 +633,7 @@ public class UserHandler {
                             newPhone = patient.getPhoneNumber();
                         }
                     } catch (NumberFormatException e) {
-                        System.out.println("Invalid input. Please enter a number.");
+                        System.out.println("Error: Invalid input. Please enter a number.");
                         break;
                     }
                 
@@ -644,7 +644,7 @@ public class UserHandler {
                     // view appointment by doctor
                     List<Doctor> allDoctors = doctorHandler.getAllDoctors();
                     if (allDoctors.isEmpty()) {
-                        System.out.println("No doctors available.");
+                        System.out.println("Notie: No doctors available.");
                         return;
                     }
 
@@ -669,7 +669,7 @@ public class UserHandler {
                             List<TimeSlot> availableSlots = selectedDoctor.getAvailability();
 
                             if (availableSlots.isEmpty()) {
-                                System.out.println("No available slots for Dr. " + selectedDoctor.getName());
+                                System.out.println("Notie: No available slots for Dr. " + selectedDoctor.getName());
                             } else {
                                 System.out.println("\n--- Available Slots for Dr. " + selectedDoctor.getName() + " ---");
                                 for (int i = 0; i < availableSlots.size(); i++) {
@@ -677,10 +677,10 @@ public class UserHandler {
                                 }
                             }
                         } else {
-                            System.out.println("Invalid index. Returning to the previous menu.");
+                            System.out.println("Error: Invalid index. Returning to the previous menu.");
                         }
                     } catch (NumberFormatException e) {
-                        System.out.println("Invalid input. Returning to the previous menu.");
+                        System.out.println("Error: Invalid input. Returning to the previous menu.");
                     }
 
                     break;
@@ -689,7 +689,7 @@ public class UserHandler {
                     // Schedule appointment
                     List<Doctor> doctors = doctorHandler.getAllDoctors();
                     if (doctors.isEmpty()) {
-                        System.out.println("No doctors available.");
+                        System.out.println("Notice: No doctors available.");
                     } else {
                         System.out.println("\n--- Available Doctors ---");
                         for (int i = 0; i < doctors.size(); i++) {
@@ -705,11 +705,11 @@ public class UserHandler {
                             if (doctorIdx >= 0 && doctorIdx < doctors.size()) {
                                 validDoctorSelected = true;
                             } else {
-                                System.out.println("Invalid index. Returning to the previous menu.");
+                                System.out.println("Error: Invalid index. Returning to the previous menu.");
                                 break;
                             }
                         } catch (NumberFormatException e) {
-                            System.out.println("Invalid input. Returning to the previous menu.");
+                            System.out.println("Error: Invalid input. Returning to the previous menu.");
                             break;
                         }
                 
@@ -718,7 +718,7 @@ public class UserHandler {
                             List<TimeSlot> slots = selectedDoctor.getAvailability();
                 
                             if (slots.isEmpty()) {
-                                System.out.println("No available slots for Dr. " + selectedDoctor.getName());
+                                System.out.println("Notie: No available slots for Dr. " + selectedDoctor.getName());
                             } else {
                                 System.out.println("\n--- Available Slots for Dr. " + selectedDoctor.getName() + " ---");
                                 for (int i = 0; i < slots.size(); i++) {
@@ -737,10 +737,10 @@ public class UserHandler {
                                         System.out.println("Scheduled appointment for " + patient.getName() + 
                                                            " with Dr. " + selectedDoctor.getName() + " at " + selectedSlot);
                                     } else {
-                                        System.out.println("Invalid slot index. Returning to the previous menu.");
+                                        System.out.println("Error: Invalid slot index. Returning to the previous menu.");
                                     }
                                 } catch (NumberFormatException e) {
-                                    System.out.println("Invalid input. Returning to the previous menu.");
+                                    System.out.println("Error: Invalid input. Returning to the previous menu.");
                                 }
                             }
                         }
@@ -755,7 +755,7 @@ public class UserHandler {
                     .toList();
 
                     if (appointments.isEmpty()) {
-                        System.out.println("No appointments to reschedule.");
+                        System.out.println("Notice: No appointments to reschedule.");
                     } else {
                         System.out.println("\n--- Your Scheduled Appointments ---");
                         for (int i = 0; i < appointments.size(); i++) {
@@ -771,7 +771,7 @@ public class UserHandler {
                             if (doctorForReschedule != null) {
                                 List<TimeSlot> availableSlots = doctorForReschedule.getAvailability();
                                 if (availableSlots.isEmpty()) {
-                                    System.out.println("No available slots for Dr. " + doctorForReschedule.getName());
+                                    System.out.println("Notice: No available slots for Dr. " + doctorForReschedule.getName());
                                 } else {
                                     System.out.println("\n--- Available Slots for Dr. " + doctorForReschedule.getName() + " ---");
                                     for (int i = 0; i < availableSlots.size(); i++) {
@@ -786,14 +786,14 @@ public class UserHandler {
                                         patient.rescheduleAppointment(appointmentToReschedule, newTimeSlot, doctorForReschedule);
                                         System.out.println("Scheduled appointment for " + patient.getName() + " with Dr. " + doctorForReschedule.getName() + " at " + newTimeSlot);
                                     } else {
-                                        System.out.println("Invalid slot index. Please try again.");
+                                        System.out.println("Error: Invalid slot index. Please try again.");
                                     }
                                 }
                             } else {
-                                System.out.println("Doctor not found.");
+                                System.out.println("Error: Doctor not found.");
                             }
                         } else {
-                            System.out.println("Invalid appointment index. Please try again.");
+                            System.out.println("Error: Invalid appointment index. Please try again.");
                         }
                     }
                     break;
@@ -803,7 +803,7 @@ public class UserHandler {
                     // cancel appt
                     List<Appointment> appointmentsToCancel = patient.getAppointments();
                     if (appointmentsToCancel.isEmpty()) {
-                        System.out.println("No scheduled appointments found to cancel.");
+                        System.out.println("Notice: No scheduled appointments found to cancel.");
                     } else {
                         System.out.println("\n--- Your Scheduled Appointments ---");
                         for (int i = 0; i < appointmentsToCancel.size(); i++) {
@@ -820,10 +820,10 @@ public class UserHandler {
                                 Appointment appointmentToCancel = appointmentsToCancel.get(appointmentIdx);
                                 patient.cancelAppointment(appointmentToCancel);
                             } else {
-                                System.out.println("Invalid index. Please select a number from the list.");
+                                System.out.println("Error: Invalid index. Please select a number from the list.");
                             }
                         } catch (NumberFormatException e) {
-                            System.out.println("Invalid input. Please enter a valid number.");
+                            System.out.println("Error: Invalid input. Please enter a valid number.");
                         }
                     }
 
@@ -845,7 +845,7 @@ public class UserHandler {
                     break;
     
                 default:
-                    System.out.println("Invalid choice. Please try again.");
+                    System.out.println("Error: Invalid choice. Please try again.");
                     continue;
             }
         }
@@ -886,9 +886,9 @@ public class UserHandler {
         if (newPassword.equals(confirmPassword)) {
             user.changePassword(newPassword);
             user.setFirstLogin(false);
-            System.out.println("Password updated successfully.");
+            System.out.println("Notice: Password updated successfully.");
         } else {
-            System.out.println("Passwords do not match. Try again.");
+            System.out.println("Error: Passwords do not match. Try again.");
             promptPasswordChange(user); 
         }
     }
@@ -917,7 +917,7 @@ public class UserHandler {
             try {
                 return scanner.nextInt(); 
             } catch (InputMismatchException e) {
-                System.out.println("Invalid input. Please enter a valid number.");
+                System.out.println("Error: Invalid input. Please enter a valid number.");
                 scanner.nextLine(); 
             }
         }

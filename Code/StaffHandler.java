@@ -80,7 +80,7 @@ public class StaffHandler implements IStaffHandler{
                 }
             }
         } catch (FileNotFoundException e) {
-            System.out.println("File not found: " + filePath);
+            System.out.println("Error: File not found: " + filePath);
             e.printStackTrace();
         }
     }
@@ -91,8 +91,8 @@ public class StaffHandler implements IStaffHandler{
      */
     public void displayStaffManagementMenu() {
         Scanner scanner = new Scanner(System.in);
-        System.out.println("--- Staff Manaagement Menu ---");
-        System.out.println("1. Add New Staff");
+        System.out.println("\n===========================\n");
+        System.out.println("1. Add Staff");
         System.out.println("2. Update Staff");
         System.out.println("3. Remove Staff");
         System.out.println("4. View All Staff");
@@ -115,7 +115,7 @@ public class StaffHandler implements IStaffHandler{
             case 3 -> removeStaff(userHandler);
             case 4 -> viewAllStaff();
             case 5 -> filterStaffMenu();
-            default -> System.out.println("Invalid action.");
+            default -> System.out.println("Error: Invalid action.");
         }
         
     }
@@ -164,16 +164,16 @@ public class StaffHandler implements IStaffHandler{
                 newStaff = new Pharmacist(userId, password, name, gender, "Pharmacist", age, pharmacistHandler, prescriptionHandler);
             } else {
                 
-                throw new InvalidRoleException("Invalid role. Only 'Doctor' or 'Pharmacist' is allowed.");
+                throw new InvalidRoleException("Error: Invalid role. Only 'Doctor' or 'Pharmacist' is allowed.");
             }
 
             addStaff(newStaff);
-            System.out.println("Staff member added: " + newStaff.getName() + " (Identifier: " + newStaff.getUserId() + ")");
+            System.out.println("Notice: Staff member added: " + newStaff.getName() + " (Identifier: " + newStaff.getUserId() + ")");
 
         } catch (InvalidRoleException | InvalidGenderException e) {
                 System.out.println("Error: " + e.getMessage());
         } catch (InputMismatchException e) {
-                System.out.println("Invalid input. Please enter the correct data type.");
+                System.out.println("Error: Invalid input. Please enter the correct data type.");
                 scanner.nextLine(); // Clear the buffer
         }
         
@@ -186,25 +186,25 @@ public class StaffHandler implements IStaffHandler{
      */
     public void updateStaff() {
         Scanner scanner = new Scanner(System.in);
-    
-        System.out.println("\n--- All Staff Members ---");
+        System.out.println("\n===========================\n");
+        System.out.println("\n--- All Staff ---");
         for (int i = 0; i < staffList.size(); i++) {
             Staff staff = staffList.get(i);
-            System.out.println(i + ": Identifier: " + staff.getUserId() + ", Name: " + staff.getName() + ", Role: " + staff.getRole());
+            System.out.println(i + ": ID: " + staff.getUserId() + ", Name: " + staff.getName() + ", Role: " + staff.getRole());
         }
     
-        System.out.print("Enter the index of the Staff to Update: ");
+        System.out.print("Enter the index to Update: ");
         int index;
         try {
             index = Integer.parseInt(scanner.nextLine());
         } catch (NumberFormatException e) {
-            System.out.println("Invalid input. Please enter a valid number.");
+            System.out.println("Error: Invalid input. Please enter a valid number.");
             
             return;
         }
     
         if (index < 0 || index >= staffList.size()) {
-            System.out.println("Invalid index. Please select a valid staff member.");
+            System.out.println("Error: Invalid index. Please select a valid staff member.");
             
             return;
         }
@@ -212,10 +212,10 @@ public class StaffHandler implements IStaffHandler{
         Staff staff = staffList.get(index);
     
         try {
-            System.out.print("Enter New Name (leave blank to keep current): ");
+            System.out.print("Enter New Name (SPACE for unchanged): ");
             String name = scanner.nextLine();
     
-            System.out.print("Enter New Role (leave blank to keep current): ");
+            System.out.print("Enter New Role (SPACE for unchanged): ");
             String role = scanner.nextLine();
     
             if (!role.isEmpty() && !role.equalsIgnoreCase(staff.getRole())) {
@@ -229,20 +229,20 @@ public class StaffHandler implements IStaffHandler{
                     newStaff = new Pharmacist(staff.getUserId(), staff.getPassword(), name.isEmpty() ? staff.getName() : name, staff.getGender(), "Pharmacist", staff.getAge(), pharmacistHandler, prescriptionHandler);
                 } else {
                     
-                    throw new InvalidRoleException("Invalid role provided.");
+                    throw new InvalidRoleException("Error: Invalid role provided.");
                 }
     
                 staffList.set(index, newStaff);
                 userList.set(userList.indexOf(staff), newStaff);
     
-                System.out.println("Role updated. Staff member changed to: " + newStaff.getName() + " (Identifier: " + newStaff.getUserId() + ", Role: " + newStaff.getRole() + ")");
+                System.out.println("Notice: Role updated. Staff member changed to: " + newStaff.getName() + " (ID: " + newStaff.getUserId() + ", Role: " + newStaff.getRole() + ")");
             }
     
             if (!name.isEmpty()) {
                 staff.setName(name);
             }
     
-            System.out.print("Enter New Age (or empty/0 to keep current): ");
+            System.out.print("Enter New Age (SPACE for unchanged): ");
             String ageInput = scanner.nextLine();
             if (!ageInput.isEmpty()) {
                 int age = Integer.parseInt(ageInput);
@@ -251,11 +251,11 @@ public class StaffHandler implements IStaffHandler{
                 }
             }
     
-            System.out.println("Updated staff member: " + staff.getName() + " (Identifier: " + staff.getUserId() + ")");
+            System.out.println("Notice: Updated staff member: " + staff.getName() + " (ID: " + staff.getUserId() + ")");
         } catch (InvalidRoleException e) {
             System.out.println("Error: " + e.getMessage());
         } catch (NumberFormatException e) {
-            System.out.println("Invalid age input. Please enter a valid number.");
+            System.out.println("Error: Invalid age input. Please enter a valid number.");
         }
         
     }
@@ -269,25 +269,25 @@ public class StaffHandler implements IStaffHandler{
      */
     public void removeStaff(UserHandler userHandler) {
         Scanner scanner = new Scanner(System.in);
-        
-        System.out.println("\n--- All Staff Members ---");
+        System.out.println("\n===========================\n");
+        System.out.println("\n--- All Staff ---");
         for (int i = 0; i < staffList.size(); i++) {
             Staff staff = staffList.get(i);
-            System.out.println(i + ": Identifier: " + staff.getUserId() + ", Name: " + staff.getName() + ", Role: " + staff.getRole());
+            System.out.println(i + ": ID: " + staff.getUserId() + ", Name: " + staff.getName() + ", Role: " + staff.getRole());
         }
         
-        System.out.print("Enter the index of the Staff to Remove: ");
+        System.out.print("Enter the index to Remove: ");
         int index;
         try {
             index = Integer.parseInt(scanner.nextLine());
         } catch (NumberFormatException e) {
-            System.out.println("Invalid input. Please enter a valid number.");
+            System.out.println("Error: Invalid input. Please enter a valid number.");
             
             return;
         }
         
         if (index < 0 || index >= staffList.size()) {
-            System.out.println("Invalid index. Please select a valid staff member.");
+            System.out.println("Error: Invalid index. Please select a valid staff member.");
             
             return;
         }
@@ -298,7 +298,7 @@ public class StaffHandler implements IStaffHandler{
         staffList.remove(index);
         userHandler.getUsers().removeIf(user -> user.getUserId().equals(userId));
     
-        System.out.println("Staff member with Identifier " + userId + " removed.");
+        System.out.println("Notice: Staff member: " + userId + " removed.");
         
     }
     
@@ -307,9 +307,10 @@ public class StaffHandler implements IStaffHandler{
      * Displays all staff members in the system.
      */
     public void viewAllStaff() {
-        System.out.println("\n--- All Staff Members ---");
+        System.out.println("\n===========================\n");
+        System.out.println("\n--- All Staff ---");
         for (Staff staff : staffList) {
-            System.out.println("Identifier: " + staff.getUserId() + ", Name: " + staff.getName() + ", Role: " + staff.getRole() + ", Gender: " + staff.getGender() + ", Age: " + staff.getAge());
+            System.out.println("ID: " + staff.getUserId() + ", Name: " + staff.getName() + ", Role: " + staff.getRole() + ", Gender: " + staff.getGender() + ", Age: " + staff.getAge());
         }
     }
 
@@ -320,7 +321,7 @@ public class StaffHandler implements IStaffHandler{
         Scanner scanner = new Scanner(System.in);
         while (true) { 
             try {
-                System.out.println("\nFilter Staff By:");
+                System.out.println("\nFilter by:");
                 System.out.println("1. Role");
                 System.out.println("2. Gender");
                 System.out.println("3. Age");
@@ -339,7 +340,7 @@ public class StaffHandler implements IStaffHandler{
                 try {
                     choice = Integer.parseInt(input);
                 } catch (NumberFormatException e) {
-                    System.out.println("Invalid input. Please enter a number between 1 and 5.");
+                    System.out.println("Error: Invalid input. Please enter a number between 1 and 5.");
                     continue; 
                 }
     
@@ -354,7 +355,7 @@ public class StaffHandler implements IStaffHandler{
                         String gender = scanner.nextLine();
                         
                         if (!gender.equalsIgnoreCase("Male") && !gender.equalsIgnoreCase("Female")) {
-                            System.out.println("Invalid gender. Please enter 'Male' or 'Female'.");
+                            System.out.println("Error: Invalid gender. Please enter 'Male' or 'Female'.");
                             continue; 
                         }
                         filterStaff(staff -> staff.getGender().equalsIgnoreCase(gender), "Gender: " + gender);
@@ -365,16 +366,16 @@ public class StaffHandler implements IStaffHandler{
                         try {
                             age = Integer.parseInt(scanner.nextLine());
                         } catch (NumberFormatException e) {
-                            System.out.println("Invalid input. Please enter a valid age.");
+                            System.out.println("Error: Invalid input. Please enter a valid age.");
                             continue; 
                         }
                         filterStaff(staff -> staff.getAge() == age, "Age: " + age);
                     }
                     case 4 -> viewAllStaff();
-                    default -> System.out.println("Invalid choice. Please enter a number between 1 and 5.");
+                    default -> System.out.println("Error: Invalid choice. Please enter a number between 1 and 5.");
                 }
             } catch (InputMismatchException e) {
-                System.out.println("Invalid input. Please enter a valid number.");
+                System.out.println("Error: Invalid input. Please enter a valid number.");
                 scanner.nextLine(); 
             }
         }
