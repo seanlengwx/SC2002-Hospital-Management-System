@@ -52,9 +52,9 @@ public class Main {
 
 
         //CSV file paths
-        String staffFilePath = "./Staff.txt";  
-        String patientFilePath = "./Patient.txt";  
-        String medicineFilePath = "./Medicine.txt";  
+        String staffFilePath = "./datafiles/Staff.txt";  
+        String patientFilePath = "./datafiles/Patient.txt";  
+        String medicineFilePath = "./datafiles/Medicine.txt";  
 
         //loading of CSV files
         CSVImport.importStaffData(staffFilePath, staffHandler, medicineHandler, pharmacistHandler, doctorHandler, prescriptionHandler);
