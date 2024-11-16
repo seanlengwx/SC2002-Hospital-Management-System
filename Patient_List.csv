@@ -1,0 +1,4 @@
+Patient ID,Password,Name,Date of Birth,Gender,Blood Type,Contact Information
+1,pwd,Alice Brown,1980-05-14,Female,A+,alice.brown@example.com
+2,pwd,John Doe,1980-05-15,Male,B+,john.doe@example.com
+3,pwd,Charlie Brown,1990-09-10,Male,AB+,charlie.brown@example.com
