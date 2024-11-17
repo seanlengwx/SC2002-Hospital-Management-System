@@ -1,4 +1,4 @@
 Staff ID,Name,Password,Role,Gender,Age
-1,John Depp,pwd,Doctor,Male,45
-2,Clarke Ken,pwd,Pharmacist,Male,30
-3,Emilia Toh,pwd,Administrator,Female,40
+S1,John Depp,pwd,Doctor,Male,45
+S2,Clarke Ken,pwd,Pharmacist,Male,30
+S3,Emilia Toh,pwd,Administrator,Female,40
