@@ -13,12 +13,12 @@ NTU Hospital Management System project SC2002
 ## Installation
 1. Clone the repository:
    ```bash
-   git clone https://github.com/seanlengwx/SC2006---Project---Hostpital-Management-System.git
+   [git clone https://github.com/seanlengwx/SC2006---Project---Hostpital-Management-System.git](https://github.com/seanlengwx/SC2002-Hospital-Management-System.git)
    ```
 
 2. Navigate to the project directory
     ```bash
-    cd SC2006---Project---Hostpital-Management-System
+    cd SC2002-Hospital-Management-System.git
     ```
 
 ## Usage
