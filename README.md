@@ -8,7 +8,7 @@ NTU Hospital Management System project SC2002
 - [Instructions / Pre-configurations](#instructions--pre-configurations)
 
 ## Getting Started
-
+Instructions on the setting up of the project.
 
 ## Installation
 1. Clone the repository:
