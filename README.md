@@ -1,6 +1,13 @@
 # Hospital Management System
 NTU Hospital Management System project SC2002
 
+## Group memebers
+- ALAN LEE LEMAN         2
+- CHEONG KEAT JIN, DAVID 7
+- PHAM NGUYEN VU HOANG   17
+- SEAN LENG WEI XUAN     19
+- YONG JUN HAN           28
+  
 ## Table of Contents
 - [Getting Started](#getting-started)
 - [Installation](#installation)
