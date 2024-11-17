@@ -100,7 +100,7 @@ public class ReplenishmentRequest {
      * @return string representation of the request
      */
 	public String toString() {
-        return "Request Identifier: " + requestIdentifier + ", Medicine: " + medicine.getName() +
+        return "Request: " + requestIdentifier + ", Medicine: " + medicine.getName() +
                ", Requested Amount: " + requestedAmount + ", Status: " + (isApproved ? "Approved" : "Pending");
     }
  

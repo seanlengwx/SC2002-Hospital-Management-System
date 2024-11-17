@@ -68,6 +68,6 @@ public class Treatment {
      */
     @Override
     public String toString() {
-        return "Treatment Identifier: " + treatmentIdentifier + ", Description: " + description;
+        return "Treatment: " + treatmentIdentifier + ", Description: " + description;
     }
 }

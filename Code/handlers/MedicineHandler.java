@@ -139,8 +139,8 @@ public class MedicineHandler implements IMedicineHandler {
      */
     public void displayMedicineManagementMenu() {
         Scanner scanner = new Scanner(System.in);
-        System.out.println("\n===========================\n");
-        System.out.println("\n--- Medicine Management ---");
+        System.out.println("\n===========================");
+        System.out.println("--- Medicine Management ---");
         System.out.println("1. View Medicine");
         System.out.println("2. Add New Medicine");
         System.out.println("3. Update Medicine Stock");
@@ -246,7 +246,7 @@ public class MedicineHandler implements IMedicineHandler {
      * view all pending replenishment request
      */
     public void viewReplenishmentRequests() {
-        System.out.println("\n===========================\n");
+        System.out.println("\n===========================");
         System.out.println("Replenishment Requests:");
         for (ReplenishmentRequest request : ReplenishmentRequest.getRequests()) {
             String status = request.isApproved() ? "Approved" : "Pending";

@@ -53,14 +53,14 @@ public class Administrator extends Staff implements IUser {
     @Override
     public void displayMenu() {
         if (isLoggedIn()) {
-                System.out.println("\n===========================\n");
-                System.out.println("\n--- Administrator Menu ---");
+                System.out.println("\n===========================");
+                System.out.println("--- Administrator Menu ---");
                 System.out.println("1. Manage Staff");
                 System.out.println("2. Manage Medicine Stock");
                 System.out.println("3. Approve Replenishments");
                 System.out.println("4. View Appointments Details");
                 System.out.println("5. Log out");
-                System.out.println("\n===========================\n");
+                System.out.println("===========================");
         } else {
             System.out.println("Error: Not logged in. (Admin)");
         }
@@ -92,7 +92,7 @@ public class Administrator extends Staff implements IUser {
      */
     public void viewAppointmentDetails() {
         List<Appointment> appointments = Appointment.getAllAppointments();
-        System.out.println("\n===========================\n");
+        System.out.println("\n===========================");
         System.out.println("Appointments in the System\n");
         
         for (Appointment appointment : appointments) {
@@ -109,6 +109,6 @@ public class Administrator extends Staff implements IUser {
                 System.out.println("");
             }
         }
-        System.out.println("\n===========================\n");
+        System.out.println("===========================");
     }
 }

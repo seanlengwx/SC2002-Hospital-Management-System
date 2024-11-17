@@ -47,8 +47,8 @@ public class PharmacistHandler implements IPharmacistHandler {
      * display all prescription record
      */
     public void viewPrescriptionRecords() {
-        System.out.println("\n===========================\n");
-        System.out.println("\nPrescription Records:");
+        System.out.println("\n===========================");
+        System.out.println("Prescription Records:");
         List<Prescription> prescriptions = prescriptionHandler.getAllPrescriptions();
 
         if (prescriptions.isEmpty()) {

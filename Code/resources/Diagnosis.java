@@ -68,6 +68,6 @@ public class Diagnosis {
      */
     @Override
     public String toString() {
-        return "Diagnosis Identifier: " + diagnosisIdentifier + ", Notes: " + description;
+        return "Diagnosis: " + diagnosisIdentifier + ", Notes: " + description;
     }
 }

@@ -56,7 +56,7 @@ public class AppointmentHandler implements IAppointmentHandler {
      * @param doctor specified doctor for this method to output his/her available slots
      */
     public void viewAvailableSlots(Doctor doctor) {
-        System.out.println("\n===========================\n");
+        System.out.println("\n===========================");
         System.out.println("Greetings Dr. " + doctor.getName());
         System.out.println("Available Slots:");
         List<TimeSlot> availableSlots = doctorHandler.getAvailability(doctor);
@@ -124,8 +124,8 @@ public class AppointmentHandler implements IAppointmentHandler {
      * @param patient the patient whose upcoming appointments are to be retrieved 
      */
     public void viewUpcomingAppointments(Patient patient) {
-        System.out.println("\n===========================\n");
-        System.out.println("\nUpcoming Appointments for Patient: " + patient.getName());
+        System.out.println("\n===========================");
+        System.out.println("Upcoming Appointments for Patient: " + patient.getName());
         List<Appointment> upcomingAppointments = getUpcomingAppointments(patient);
     
         if (upcomingAppointments.isEmpty()) {
@@ -161,8 +161,8 @@ public class AppointmentHandler implements IAppointmentHandler {
      * @param doctor the doctor whose upcoming appointments are to be retrieved 
      */
     public void viewUpcomingAppointments(Doctor doctor) {
-        System.out.println("\n===========================\n");
-        System.out.println("\nUpcoming Appointments for Dr." + doctor.getName());
+        System.out.println("\n===========================");
+        System.out.println("Upcoming Appointments for Dr." + doctor.getName());
         List<Appointment> upcomingAppointments = getUpcomingAppointments(doctor);
     
         if (upcomingAppointments.isEmpty()) {
@@ -269,7 +269,7 @@ public class AppointmentHandler implements IAppointmentHandler {
                 return appointment;
             }
         }
-        System.out.println("Error: Appointment with Identifier " + appointmentIdentifier + " not found.");
+        System.out.println("Error: Appointment " + appointmentIdentifier + " not found.");
         return null;
     }
     

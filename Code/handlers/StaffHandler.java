@@ -95,7 +95,7 @@ public class StaffHandler implements IStaffHandler{
      */
     public void displayStaffManagementMenu() {
         Scanner scanner = new Scanner(System.in);
-        System.out.println("\n===========================\n");
+        System.out.println("\n===========================");
         System.out.println("1. Add Staff");
         System.out.println("2. Update Staff");
         System.out.println("3. Remove Staff");
@@ -190,8 +190,8 @@ public class StaffHandler implements IStaffHandler{
      */
     public void updateStaff() {
         Scanner scanner = new Scanner(System.in);
-        System.out.println("\n===========================\n");
-        System.out.println("\n--- All Staff ---");
+        System.out.println("\n===========================");
+        System.out.println("--- Staff List ---");
         for (int i = 0; i < staffList.size(); i++) {
             Staff staff = staffList.get(i);
             System.out.println(i + ": ID: " + staff.getUserId() + ", Name: " + staff.getName() + ", Role: " + staff.getRole());
@@ -273,8 +273,8 @@ public class StaffHandler implements IStaffHandler{
      */
     public void removeStaff(UserHandler userHandler) {
         Scanner scanner = new Scanner(System.in);
-        System.out.println("\n===========================\n");
-        System.out.println("\n--- All Staff ---");
+        System.out.println("\n===========================");
+        System.out.println("--- Staff List ---");
         for (int i = 0; i < staffList.size(); i++) {
             Staff staff = staffList.get(i);
             System.out.println(i + ": ID: " + staff.getUserId() + ", Name: " + staff.getName() + ", Role: " + staff.getRole());
@@ -308,11 +308,11 @@ public class StaffHandler implements IStaffHandler{
     
     
     /**
-     * Displays all staff members in the system.
+     * Displays Staff List members in the system.
      */
     public void viewAllStaff() {
-        System.out.println("\n===========================\n");
-        System.out.println("\n--- All Staff ---");
+        System.out.println("\n===========================");
+        System.out.println("--- Staff List ---");
         for (Staff staff : staffList) {
             System.out.println("ID: " + staff.getUserId() + ", Name: " + staff.getName() + ", Role: " + staff.getRole() + ", Gender: " + staff.getGender() + ", Age: " + staff.getAge());
         }
