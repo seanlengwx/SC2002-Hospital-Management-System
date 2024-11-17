@@ -62,7 +62,7 @@ public class Administrator extends Staff implements IUser {
                 System.out.println("5. Log out");
                 System.out.println("===========================");
         } else {
-            System.out.println("Error: Not logged in. (Admin)");
+            System.out.println("Error: Not logged in.");
         }
     }
 

@@ -94,7 +94,7 @@ public class Pharmacist extends Staff implements IUser {
      */
     public void displayMenu() {
         if (isLoggedIn()) {
-            System.out.println("\n===========================\n");
+            System.out.println("\n===========================");
             System.out.println("1. View Prescription Records");
             System.out.println("2. View Pending Prescription Records");
             System.out.println("3. Update Prescription Status");

@@ -217,7 +217,7 @@ public class Patient extends User implements IUser {
      */
     public void displayMenu() {
         if (isLoggedIn()) {
-            
+            System.out.println("\n===========================");
             System.out.println("\n--- Patient Menu ---");
             System.out.println("1. View Medical Record");
             System.out.println("2. Update Personal Information");
@@ -229,7 +229,7 @@ public class Patient extends User implements IUser {
             System.out.println("8. View Past Appointment Outcome Records");
             System.out.println("9. Logout");
         } else {
-            System.out.println("ERROR. PLEASE LOG IN! (Patient)");
+            System.out.println("Error: Not logged in.");
         }
     }
 }

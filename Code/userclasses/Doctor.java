@@ -158,7 +158,7 @@ public class Doctor extends Staff implements IUser {
     @Override
     public void displayMenu() {
         if (isLoggedIn()) {
-            System.out.println("\n===========================\n");
+            System.out.println("\n===========================");
             System.out.println("1. View Patient Records");
             System.out.println("2. Update Patient Records");
             System.out.println("3. View Schedule");
