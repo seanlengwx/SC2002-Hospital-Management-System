@@ -72,7 +72,7 @@ public class UserHandler {
      * it will require the user to change password upon the first logon
      * displaying the menu bsaed on the user role
      */
-    public void loginUser() {
+    public void startApp() {
         Scanner scanner = new Scanner(System.in);
     
         System.out.print("Enter User Identifier (or 'E' to exit): ");
@@ -113,7 +113,7 @@ public class UserHandler {
             }
         }
         System.out.println("Error: Invalid credentials. Please try again.");
-        loginUser(); // repeat logins if failed
+        startApp(); // repeat logins if failed
     }
 
     /**
@@ -449,7 +449,7 @@ public class UserHandler {
                     break;
                     case 8:
                         doctor.logout();
-                        loginUser();
+                        startApp();
                         return;
                     default:
                         System.out.println("Error: Invalid choice. Please try again.");
@@ -490,7 +490,7 @@ public class UserHandler {
                         break;
                     case 5:
                         admin.logout();   
-                        loginUser(); 
+                        startApp(); 
                         return;
                     default:
                         System.out.println("Error: Invalid choice. Please try again.");
@@ -579,7 +579,7 @@ public class UserHandler {
                         break;
                     case 7:
                         pharmacist.logout();     
-                        loginUser();
+                        startApp();
                         break;
                     default:
                         System.out.println("Error: Invalid choice. Please try again.");
@@ -846,7 +846,7 @@ public class UserHandler {
     
                 case 9:
                     patient.logout();
-                    loginUser();
+                    startApp();
                     break;
     
                 default:

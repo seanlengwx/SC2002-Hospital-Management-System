@@ -12,12 +12,12 @@ import interfaces.*;
  * Medicine_List.csv, Patient_List.csv, Staff_List.csv
  * The files are indicated in Main.java
  */
-public class CSVImport {
+public class TxtImport {
     
     /**
      * Default constructor for CSVImportManager.
      */
-    public CSVImport() {
+    public TxtImport() {
     }
     
     /**

@@ -6,11 +6,12 @@ import userclasses.*;
 import interfaces.*;
 import handlers.*;
 /**
- * Using Main to initialize and load data from CSV and starting of the application.
+ * Initialize and load data from CSV
+ * Start application with loginUser() function
  */
 public class Main {
     /**
-     * Default constructor for Main
+     * onstructor for Main
      */
     public Main() {}
 
@@ -35,9 +36,9 @@ public class Main {
         UserHandler userHandler = new UserHandler(sharedUserList, doctorHandler, appointmentHandler, medicineHandler, prescriptionHandler);
         IStaffHandler staffHandler = new StaffHandler(initialStaffList, sharedUserList, userHandler, medicineHandler, prescriptionHandler, doctorHandler);
 
-        //Pre-loaded/Sample timeslot for demo
-        TimeSlot slot1 = new TimeSlot(LocalDate.now().plusDays(1), LocalTime.of(10, 0));
-        TimeSlot slot2 = new TimeSlot(LocalDate.now().plusDays(2), LocalTime.of(10, 0));
+        //Pre defined timeslot's for demonstration purposes
+        TimeSlot slot1 = new TimeSlot(LocalDate.now().plusDays(1), LocalTime.of(9, 30));
+        TimeSlot slot2 = new TimeSlot(LocalDate.now().plusDays(2), LocalTime.of(9, 30));
         
         //manager dependencies
         prescriptionHandler.setMedicineHandler(medicineHandler);
@@ -51,15 +52,15 @@ public class Main {
         doctorHandler.setPrescriptionHandler(prescriptionHandler);
 
 
-        //CSV file paths
+        //data file paths
         String staffFilePath = "./datafiles/Staff.txt";  
         String patientFilePath = "./datafiles/Patient.txt";  
         String medicineFilePath = "./datafiles/Medicine.txt";  
 
-        //loading of CSV files
-        CSVImport.importStaffData(staffFilePath, staffHandler, medicineHandler, pharmacistHandler, doctorHandler, prescriptionHandler);
-        CSVImport.importPatientData(patientFilePath, patientHandler, appointmentHandler);
-        CSVImport.importMedicineData(medicineFilePath, medicineHandler);
+        //loading of file files
+        TxtImport.importStaffData(staffFilePath, staffHandler, medicineHandler, pharmacistHandler, doctorHandler, prescriptionHandler);
+        TxtImport.importPatientData(patientFilePath, patientHandler, appointmentHandler);
+        TxtImport.importMedicineData(medicineFilePath, medicineHandler);
 
         //add all users to shared list
         sharedUserList.addAll(staffHandler.getAllStaff());
@@ -71,7 +72,7 @@ public class Main {
         doctor1.addAvailability(slot2);
 
         //start
-        userHandler.loginUser();  
+        userHandler.startApp();  
     }
 }
         

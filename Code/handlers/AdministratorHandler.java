@@ -26,7 +26,7 @@ public class AdministratorHandler {
     public void approveReplenishmentRequests() {
         List<ReplenishmentRequest> requests = medicineHandler.getPendingReplenishmentRequests();
         if (requests.isEmpty()) {
-            System.out.println("No requests found.");
+            System.out.println("Error: No requests found.");
             return;
         }
 
