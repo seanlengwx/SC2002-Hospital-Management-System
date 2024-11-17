@@ -67,7 +67,7 @@ public class Main {
         sharedUserList.addAll(patientHandler.getAllPatientsInternal());
 
         //set doctor availability based on previous demo timeslots
-        Doctor doctor1 = doctorHandler.findDoctorById("1");
+        Doctor doctor1 = doctorHandler.findDoctorById("S1");
         doctor1.addAvailability(slot1);
         doctor1.addAvailability(slot2);
 
