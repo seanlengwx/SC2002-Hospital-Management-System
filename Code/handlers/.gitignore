@@ -1,0 +1,14 @@
+/AdministratorHandler.class
+/AppointmentHandler.class
+/DiagnosisHandler.class
+/DoctorHandler.class
+/MedicineHandler.class
+/PatientHandler.class
+/PharmacistHandler.class
+/PrescriptionHandler.class
+/StaffHandler$InvalidGenderException.class
+/StaffHandler$InvalidRoleException.class
+/StaffHandler.class
+/TreatmentHandler.class
+/TxtImport.class
+/UserHandler.class
